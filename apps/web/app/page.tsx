@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/providers/ThemeToggle";
 // import { Card } from "@repo/ui/card";
 
 export default function Page() {
-  console.log("test");
+  // console.log("test");
   return (
     <main className="flex flex-col items-center justify-between min-h-screen p-24">
       <ThemeToggle />
