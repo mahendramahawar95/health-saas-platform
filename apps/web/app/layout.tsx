@@ -1,7 +1,8 @@
 import "@repo/ui/styles.css";
-import "./globals.css";
+import "../styles/globals.css";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+// import "./globals.css";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
@@ -14,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={GeistSans.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

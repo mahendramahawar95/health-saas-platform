@@ -1,30 +1,98 @@
-import { type ReactNode } from "react";
+"use client";
 
-export function Card({
-  title,
-  children,
-  href,
-}: {
-  title: string;
-  children: ReactNode;
-  href: string;
-}) {
+export function Card() {
   return (
-    <a
-      className="ui:group ui:rounded-lg ui:border ui:border-transparent ui:px-5 ui:py-4 ui:transition-colors hover:ui:border-neutral-700 hover:ui:bg-neutral-800/30"
-      href={`${href}?utm_source=create-turbo&utm_medium=with-tailwind&utm_campaign=create-turbo"`}
-      rel="noopener noreferrer"
-      target="_blank"
+    <article
+      className="
+        relative
+
+        z-card
+
+        max-w-[520px]
+
+        rounded-card
+
+        bg-card
+        text-foreground
+
+        border
+        border-border
+
+        shadow-card
+
+        p-card
+
+        transition-all
+        duration-300
+        ease-smooth
+
+        hover:-translate-y-1
+        hover:shadow-xl
+      "
     >
-      <h2 className="ui:mb-3 ui:text-2xl ui:font-semibold">
-        {title}{" "}
-        <span className="ui:inline-block ui:transition-transform group-hover:ui:translate-x-1 motion-reduce:ui:transform-none">
-          -&gt;
+      {/* HEADER */}
+      <div className="flex items-center gap-4">
+        <div
+          className="
+            size-12
+            rounded-full
+            bg-primary/10
+            flex
+            items-center
+            justify-center
+          "
+        >
+          <span className="text-primary text-lg">❤️</span>
+        </div>
+
+        <div>
+          <h3 className="text-h3 font-semibold">Patient Overview</h3>
+
+          <p className="text-body opacity-70">Health summary dashboard</p>
+        </div>
+      </div>
+
+      {/* BODY */}
+      <div className="mt-6 space-y-3">
+        <div className="flex justify-between text-body">
+          <span>Heart Rate</span>
+          <span className="text-success font-medium">Normal</span>
+        </div>
+
+        <div className="flex justify-between text-body">
+          <span>Blood Pressure</span>
+          <span>120/80</span>
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <div className="mt-6 flex items-center justify-between">
+        <button
+          className="
+            bg-primary
+            text-white
+
+            px-5
+            py-2.5
+
+            rounded-lg
+
+            transition
+            hover:opacity-90
+          "
+        >
+          View Report
+        </button>
+
+        <span
+          className="
+            text-xs
+            opacity-60
+          "
+        >
+          Updated 2h ago
         </span>
-      </h2>
-      <p className="ui:m-0 ui:max-w-[30ch] ui:text-sm ui:opacity-50">
-        {children}
-      </p>
-    </a>
+      </div>
+    </article>
   );
 }
