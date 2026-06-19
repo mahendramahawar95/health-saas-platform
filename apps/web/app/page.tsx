@@ -1,6 +1,5 @@
 import { ThemeToggle } from "@/components/providers/ThemeToggle";
 
-
 export default function Page() {
   // console.log("test");
   return (
