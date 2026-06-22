@@ -1,9 +1,11 @@
+import Header from "@/components/header";
 import { ThemeToggle } from "@/components/providers/ThemeToggle";
 
 export default function Page() {
   // console.log("test");
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
+    <main className="flex flex-col items-center justify-between min-h-screen">
+      <Header />
       <ThemeToggle />
 
       <div
