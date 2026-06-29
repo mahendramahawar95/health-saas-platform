@@ -163,7 +163,7 @@ export default function Page() {
       </div>
       <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <section className="py-12 lg:py-20">
-          <h1 className="text-display font-bold">
+          <h1 className="text-display text-primary font-bold  no-underline transition-colors duration-300 hover:text-surface">
             Healthcare Management Platform
           </h1>
 
@@ -171,6 +171,65 @@ export default function Page() {
             {/* cards */}
           </div>
         </section>
+      </div>
+      <div className="@container">
+        <div className="@md:grid @md:grid-cols-2">
+          ContentHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management
+          PlatformHealthcare Management PlatformHealthcare Management Platform
+        </div>
       </div>
     </main>
   );

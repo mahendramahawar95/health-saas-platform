@@ -1,5 +1,5 @@
-import TopBar from "./top-bar/TopBar";
-import Navbar from "./navbar/Navbar";
+import TopBar from "./TopBar";
+import Navbar from "./Navbar";
 import styles from "./Header.module.css";
 
 export default function Header() {
