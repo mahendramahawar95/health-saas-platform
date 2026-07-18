@@ -1,30 +1,50 @@
-import { type ReactNode } from "react";
+import { ReactNode, HTMLAttributes } from "react";
+import { cn } from "./lib/cn";
+
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  title?: string;
+  description?: string;
+  footer?: ReactNode;
+  children?: ReactNode;
+  image?: ReactNode;
+}
 
 export function Card({
   title,
+  description,
+  footer,
+  image,
   children,
-  href,
-}: {
-  title: string;
-  children: ReactNode;
-  href: string;
-}) {
+  className,
+  ...props
+}: CardProps) {
   return (
-    <a
-      className="ui:group ui:rounded-lg ui:border ui:border-transparent ui:px-5 ui:py-4 ui:transition-colors hover:ui:border-neutral-700 hover:ui:bg-neutral-800/30"
-      href={`${href}?utm_source=create-turbo&utm_medium=with-tailwind&utm_campaign=create-turbo"`}
-      rel="noopener noreferrer"
-      target="_blank"
+    <div
+      className={cn(
+        "rounded-xl cursor-pointer border border-border bg-card text-card-foreground shadow-sm p-6 duration-300 hover:shadow-md hover:scale-[1.01] transition-transform",
+        className,
+      )}
+      {...props}
     >
-      <h2 className="ui:mb-3 ui:text-2xl ui:font-semibold">
-        {title}{" "}
-        <span className="ui:inline-block ui:transition-transform group-hover:ui:translate-x-1 motion-reduce:ui:transform-none">
-          -&gt;
-        </span>
-      </h2>
-      <p className="ui:m-0 ui:max-w-[30ch] ui:text-sm ui:opacity-50">
-        {children}
-      </p>
-    </a>
+      {image && <div className="mb-4">{image}</div>}
+      {(title || description) && (
+        <div className="flex flex-col space-y-1.5 mb-4">
+          {title && (
+            <h3 className="text-lg font-semibold leading-none tracking-tight">
+              {title}
+            </h3>
+          )}
+          {description && (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          )}
+        </div>
+      )}
+
+      {children && <div>{children}</div>}
+
+      {footer && (
+        <div className="mt-4 pt-4 border-t border-border">{footer}</div>
+      )}
+    </div>
   );
 }

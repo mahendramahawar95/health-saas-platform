@@ -1,28 +1,50 @@
 @import "tailwindcss";
-:root {
-  /* --background: oklch(100% 0 0); */
-  /* --foreground: oklch(18% 0 0); */
-  /* --color-card: oklch(22% 0 0); */
-}
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
 
 .dark {
-  /* --background: oklch(18% 0 0); */
-  /* --foreground: oklch(98% 0 0); */
-  --color-card: oklch(98% 0 0);
+  --color-background: oklch(18% 0 0);
+  --color-foreground: oklch(98% 0 0);
+  --color-card: oklch(22% 0 0);
+}
+@utility container {
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
 }
 @theme {
+  /* GRADIENTS */
+  --background-image-gradient-primary: linear-gradient(
+    45deg,
+    oklch(91.4% 0.022 240),
+    oklch(76.5% 0.076 243),
+    oklch(90.6% 0.023 233)
+  );
+  --background-image-gradient-secondary: linear-gradient(
+    45deg,
+    oklch(58.2% 0.074 243),
+    oklch(72.7% 0.07 241),
+    oklch(58.2% 0.074 243)
+  );
   /* COLORS */
-  --color-primary: oklch(40.9% 0.154 211.63);
+  --color-primary: oklch(0.39 0.13 255.58);
 
   --color-surface: oklch(100% 0 0);
   --color-surface-secondary: oklch(98% 0.003 250);
 
-  /* --color-primary: oklch(40.9% 0.154 211.63); */
-  --color-text-secondary: oklch(55% 0.01 250);
+  --color-content-secondary: oklch(55% 0.01 250);
 
   --color-border: oklch(92% 0.01 250);
   --color-overlay: oklch(0% 0 0 / 0.4);
-  /* --color-card: red; */
+
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
   --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.05);
   --shadow-md: 0 4px 8px oklch(0% 0 0 / 0.08);
@@ -33,9 +55,9 @@
     0 1px 3px oklch(0% 0 0 / 0.08), 0 4px 12px oklch(0% 0 0 / 0.05);
   --spacing-card: 24px;
 
-  --z-card: 10;
+  --z-index-card: 10;
 
-  --size-icon: 24px;
+  --spacing-icon: 24px;
 
   --color-secondary: oklch(96% 0.01 250);
 
@@ -45,12 +67,9 @@
 
   --color-background: oklch(100% 0 0);
   --color-foreground: oklch(18% 0 0);
-
-  /* --color-card: oklch(98% 0 0); */
-  --color-card: oklch(96% 0.02 220);
+  --color-card: oklch(0.96 0.01 248.12 / 1);
 
   /* TYPOGRAPHY */
-
   --text-display: clamp(3rem, 5vw, 5rem);
 
   --text-h1: clamp(2.5rem, 4vw, 4rem);
@@ -66,7 +85,6 @@
   --text-xs: clamp(0.75rem, 0.7vw, 0.875rem);
 
   /* SPACING */
-
   --spacing-xs: 8px;
   --spacing-sm: 16px;
   --spacing-md: 24px;
@@ -76,7 +94,6 @@
   --spacing-3xl: 96px;
 
   /* RADIUS */
-
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -84,8 +101,7 @@
   --radius-xl: 24px;
 
   /* LAYOUT */
-
-  --container: 1440px;
+  --container-default: 1440px;
   --container-wide: 1600px;
 
   --navbar-height: 72px;

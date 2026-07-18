@@ -3,3 +3,7 @@ export * from "./card";
 export * from "./gradient";
 export * from "./lib/cn";
 export * from "./turborepo-logo";
+export * from "./components/Slider";
+export * from "./components/hero/Hero";
+export * from "./carousel/index";
+export * from "./input/index";
