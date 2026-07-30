@@ -7,3 +7,6 @@ export * from "./components/Slider";
 export * from "./components/hero/Hero";
 export * from "./carousel/index";
 export * from "./input/index";
+export * from "./components/badge/badge";
+export * from "./components/section/section";
+export * from "./components/section-heading/section-heading";

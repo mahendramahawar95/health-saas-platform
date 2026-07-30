@@ -1,21 +1,21 @@
+import { Section, SectionHeading } from "@repo/ui";
 import Image from "next/image";
 
 export default function Frontline() {
   return (
-    <section className="frontline w-full">
+    <Section id="frontline" className="bg-section-first py-3xl pt-0">
       <div className="container">
-        <div className="title">
-          <span className="inline-flex items-center rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 text-xs font-medium px-2.5 py-1">
-            BLOG
-          </span>
-          <h2 className="text-h2">LAtest from medical frontline</h2>
-        </div>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm ">
+        <SectionHeading
+          badgeClass="bg-badge-tag p-2 text-primary font-bold"
+          badgeText="BLOG"
+          heading="LAtest from medical frontline"
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
-                src="/docter1.jpg"
+                src="/front-1.png"
                 alt="Hero"
                 width={100}
                 height={200}
@@ -60,13 +60,13 @@ export default function Frontline() {
               </div>
             </div>
           </div>
-          <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm ">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
-                src="/docter1.jpg"
+                src="/front-3.png"
                 alt="Hero"
-                width={100}
+                width={200}
                 height={200}
                 className="w-full h-full object-cover"
               />
@@ -100,22 +100,22 @@ export default function Frontline() {
                 <Image
                   src="/avatar.avif"
                   alt="Hero"
-                  width={9}
-                  height={9}
-                  className="rounded-full object-cover"
+                  width={16}
+                  height={16}
+                  className=" rounded-full object-cover"
                 />
 
                 <span className="text-sm font-medium">Dr. Sarah Johnson</span>
               </div>
             </div>
           </div>
-          <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm ">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
-                src="/docter1.jpg"
+                src="/front-2.png"
                 alt="Hero"
-                width={100}
+                width={200}
                 height={200}
                 className="w-full h-full object-cover"
               />
@@ -160,6 +160,6 @@ export default function Frontline() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

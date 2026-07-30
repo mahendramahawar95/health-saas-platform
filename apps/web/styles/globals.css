@@ -20,6 +20,47 @@
     line-height: 1.1;
   }
 }
+
+@keyframes ekg-draw {
+  from {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@utility animate-ekg {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: ekg-draw 1.8s ease-out 0.2s forwards;
+}
+
+@utility animate-pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ekg,
+    .animate-pulse-dot {
+      animation: none;
+    }
+  }
+}
+
 @theme {
   /* GRADIENTS */
   --background-image-gradient-primary: linear-gradient(
@@ -34,8 +75,31 @@
     oklch(72.7% 0.07 241),
     oklch(58.2% 0.074 243)
   );
+
+  --background-image-gradient-section: linear-gradient(
+    to top,
+    oklch(0.95 0.02 244.21),
+    oklch(0.95 0.02 270.45)
+  );
+
+  --background-image-gradient-card: linear-gradient(
+    to bottom,
+    oklch(0.62 0.07 247.76),
+    oklch(0.95 0.02 265.87)
+  );
+
+  /* section colors */
+
+  --color-section-first: oklch(0.98 0.01 275.14);
+  --color-section-second: oklch(0.95 0.02 269.55);
+  --color-section-third: oklch(1 0 0);
+  --color-section-fourth: oklch(0.95 0.02 244.21);
+  --color-section-fifth: oklch(0.95 0.02 270.45);
+
   /* COLORS */
   --color-primary: oklch(0.39 0.13 255.58);
+  --color-card-bg: oklch(0.92 0.02 250.49);
+  --color-section: oklch(0.98 0.01 275.14);
 
   --color-surface: oklch(100% 0 0);
   --color-surface-secondary: oklch(98% 0.003 250);
@@ -44,6 +108,10 @@
 
   --color-border: oklch(92% 0.01 250);
   --color-overlay: oklch(0% 0 0 / 0.4);
+
+  /* color tags */
+
+  --color-badge-tag: oklch(0.89 0.21 147.89);
 
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
   --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.05);
@@ -85,13 +153,14 @@
   --text-xs: clamp(0.75rem, 0.7vw, 0.875rem);
 
   /* SPACING */
-  --spacing-xs: 8px;
-  --spacing-sm: 16px;
-  --spacing-md: 24px;
-  --spacing-lg: 32px;
-  --spacing-xl: 48px;
-  --spacing-2xl: 64px;
-  --spacing-3xl: 96px;
+  --spacing-xs: 0.5rem; /* 8px */
+
+  --spacing-sm: clamp(0.75rem, 0.65rem + 0.4vw, 1rem); /* 12px → 16px */
+  --spacing-md: clamp(1rem, 0.85rem + 0.6vw, 1.5rem); /* 16px → 24px */
+  --spacing-lg: clamp(1.25rem, 1rem + 1vw, 2rem); /* 20px → 32px */
+  --spacing-xl: clamp(1.75rem, 1.3rem + 1.8vw, 3rem); /* 28px → 48px */
+  --spacing-2xl: clamp(2rem, 1.4rem + 2.4vw, 4rem); /* 32px → 64px */
+  --spacing-3xl: clamp(2.5rem, 1.4rem + 4.4vw, 6rem); /* 40px → 96px */
 
   /* RADIUS */
   --radius-xs: 4px;

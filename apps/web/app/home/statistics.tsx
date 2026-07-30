@@ -1,6 +1,8 @@
+import { Section } from "@repo/ui";
+
 export default function Statistics() {
   return (
-    <section className="section-statistics w-full">
+    <Section id="section-statistics" className="bg-section-second py-xl">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
           <div className="text-center">
@@ -21,6 +23,6 @@ export default function Statistics() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

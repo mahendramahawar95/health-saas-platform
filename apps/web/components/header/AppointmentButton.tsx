@@ -3,7 +3,7 @@ import { Button } from "@repo/ui";
 
 export default function AppointmentButton() {
   return (
-    <Button className="hidden xl:flex">
+    <Button variant={"primary"} className="text-background">
       <Link href="/appointment">Book Appointment</Link>
     </Button>
   );

@@ -5,8 +5,12 @@ export const buttonVariants = cva(
     inline-flex
     items-center
     justify-center
+    gap-xs
+    rounded-md
     font-medium
-    transition-all
+    shadow-card
+    transition-transform
+    hover:-translate-y-0.5
     disabled:pointer-events-none
     disabled:opacity-50
   `,
@@ -15,8 +19,7 @@ export const buttonVariants = cva(
       variant: {
         primary: `
           bg-primary
-          text-white
-          hover:opacity-90
+          text-background
         `,
 
         secondary: `
@@ -32,9 +35,9 @@ export const buttonVariants = cva(
       },
 
       size: {
-        sm: "h-9 px-4 text-sm",
-        md: "h-11 px-6 text-base",
-        lg: "h-14 px-8 text-lg",
+        sm: "px-md py-xs text-sm",
+        md: "px-lg py-sm text-body",
+        lg: "px-xl py-md text-lg",
       },
     },
 

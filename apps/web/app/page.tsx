@@ -6,29 +6,33 @@ import Banner from "./home/banner";
 import SectionAbout from "./home/section-about";
 import Statistics from "./home/statistics";
 import Offer from "./home/offer";
-import { Slider } from "@repo/ui";
 import Testimomials from "./home/testimonials";
-import Departments from "./home/departments";
+import MedicalDepartments from "./home/departments";
 import Frontline from "./home/frontline";
 import AppointmentSection from "./home/appointment-section";
 import Footer from "@/components/footer/footer";
+import { DoctorsCarousel } from "./home/doctors";
 export default function Page() {
   // console.log("test");
   return (
     <main className="flex flex-col items-center justify-between min-h-screen">
       <Header />
       {/* <ThemeToggle /> */}
-      <Slider />
       <Banner />
       <CardSection />
       <SectionAbout />
       <Statistics />
       <Offer />
+      <DoctorsCarousel />
+      <MedicalDepartments />
       <Testimomials />
-      <Departments />
       <Frontline />
-      <AppointmentSection />
-      <Footer />
+      <div className="bg-gradient-section py-3xl w-full">
+        <AppointmentSection />
+        <div className="container">
+          <Footer />
+        </div>
+      </div>
       {/* <h1 className="text-display text-primary -0.5rem font-bold line-height-0 uppercase tracking-tight mt-[150px]">
         Welcome to the Home Page
       </h1> */}

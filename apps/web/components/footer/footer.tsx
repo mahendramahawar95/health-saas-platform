@@ -56,8 +56,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <footer className="border-t border-border bg-background rounded-xl mt-3xl">
+      <div className=" px-6 py-12">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Right: Subscribe - 30% */}
           <div className="w-full lg:w-[30%]">

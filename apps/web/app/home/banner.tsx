@@ -1,29 +1,78 @@
+// import Image from "next/image";
+// import { Hero, Button } from "@repo/ui";
+
+import { Badge, Button } from "@repo/ui";
+import { Activity, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Hero, Button } from "@repo/ui";
 export default function Banner() {
   return (
-    <Hero
-      className="bg-gradient-primary pt-12"
-      badge={
-        <span className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
-          🚀 New Release
-        </span>
-      }
-      title={
-        <>
-          Build Better
-          <br />
-          Applications
-        </>
-      }
-      description="Create modern web applications with our reusable UI components."
-      actions={
-        <>
-          <Button>Get Started</Button>
-          <Button variant="outline">Learn More</Button>
-        </>
-      }
-      image={<Image src="/Subject.png" alt="Hero" width={600} height={600} />}
-    />
+    <section className="relative overflow-hidden border-b border-border bg-gradient-primary w-full">
+      <div className="container grid grid-cols-1 gap-2xl py-2xl pb-0 lg:grid-cols-[1.1fr_0.9fr]">
+        {/* Left column — copy + CTAs */}
+        <div className="flex flex-col items-start gap-md ">
+          <Badge className="inline-flex items-center rounded-xs text-primary p-2 text-md font-bold bg-white">
+            <Activity className="size-icon" aria-hidden="true" /> Fast treatment
+          </Badge>
+
+          <h1 className="text-display font-semibold tracking-tight text-foreground">
+            Your health,
+            <br />
+            matched to the <span className="text-primary">right care</span> —
+            fast.
+          </h1>
+
+          <p className="max-w-[46ch] text-body-lg text-content-secondary">
+            Medicare connects you to 200+ verified specialists with real-time
+            availability. Find a doctor, compare slots, and confirm your visit —
+            no phone calls, no waiting rooms.
+          </p>
+
+          <div className="mt-sm flex flex-wrap items-center gap-sm">
+            <Button variant={"primary"} className="text-background">
+              Book an Appointment
+              <ArrowRight className="size-icon" aria-hidden="true" />
+            </Button>
+            {/* <Button className="text-background" variant="primary" href="#book">Book an Appointment  <ArrowRight className="size-icon" aria-hidden="true" /></Button> */}
+            <Button variant={"outline"} className="hover:bg-surface-secondary">
+              Explore Departments
+            </Button>
+          </div>
+
+          {/* Trust row */}
+          {/* <div className="mt-lg flex items-center gap-sm border-t border-border pt-md">
+            <div className="flex -space-x-3" aria-hidden="true">
+              {["A", "B", "C", "D"].map((seed) => (
+                <span
+                  key={seed}
+                  className="flex size-10 items-center justify-center rounded-full border-2 border-background bg-gradient-primary text-xs font-semibold text-foreground"
+                >
+                  {seed}
+                </span>
+              ))}
+            </div>
+            <div className="flex items-center gap-1 text-small text-foreground">
+              <Star
+                className="size-4 fill-warning text-warning"
+                aria-hidden="true"
+              />
+              <span className="font-semibold">4.9</span>
+              <span className="text-content-secondary">·</span>
+              <span className="text-content-secondary">
+                200+ specialists online now
+              </span>
+            </div>
+          </div> */}
+        </div>
+        <div className="right-colounm">
+          <Image
+            src="/hero.png"
+            alt="medicare"
+            height={500}
+            width={500}
+            className="  inset-0 h-full w-full object-contain "
+          />
+        </div>
+      </div>
+    </section>
   );
 }

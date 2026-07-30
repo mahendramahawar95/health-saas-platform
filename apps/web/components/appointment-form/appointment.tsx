@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "@repo/ui";
+import { Button, Input } from "@repo/ui";
 import { User, Mail, Phone, Calendar, Clock, Stethoscope } from "lucide-react";
 
 export default function AppointmentForm() {
@@ -14,18 +14,25 @@ export default function AppointmentForm() {
     department: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(true);
+
   const handleChange =
     (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
     };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // console.log(form);
-  };
+    setIsSubmitting(true);
+    try {
+      // await submitForm(data);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
-    <div className="rounded-xl border border-border bg-card shadow-sm p-6  w-full">
+    <div className="rounded-xl border border-border bg-white shadow-sm p-6  w-full">
       <h2 className="text-lg font-semibold mb-1">Book an Appointment</h2>
       <p className="text-sm text-muted-foreground mb-6">
         Fill in your details and we will confirm your slot shortly.
@@ -90,12 +97,15 @@ export default function AppointmentForm() {
           />
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="w-full rounded-lg bg-gradient-primary text-white font-medium h-11 mt-2 hover:bg-gradient-secondary transition-all duration-300"
+          variant={"primary"}
+          className="text-white"
+          isLoading={isSubmitting}
+          loadingText="Booking..."
         >
-          Confirm Appointment
-        </button>
+          Book an Appointment
+        </Button>
       </form>
     </div>
   );
