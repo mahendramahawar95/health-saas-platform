@@ -1,17 +1,19 @@
 import Header from "@/components/header";
 // import { ThemeToggle } from "@/components/providers/ThemeToggle";
 
-import CardSection from "./home/card-section";
-import Banner from "./home/banner";
-import SectionAbout from "./home/section-about";
-import Statistics from "./home/statistics";
-import Offer from "./home/offer";
-import Testimomials from "./home/testimonials";
-import MedicalDepartments from "./home/departments";
-import Frontline from "./home/frontline";
-import AppointmentSection from "./home/appointment-section";
+import CardSection from "../components/home/card-section";
+import Banner from "../components/home/banner";
+import SectionAbout from "../components/home/section-about";
+import Statistics from "../components/home/statistics";
+import Offer from "../components/home/offer";
+import Testimomials from "../components/home/testimonials";
+import MedicalDepartments from "../components/home/departments";
+import Frontline from "../components/home/frontline";
+import AppointmentSection from "../components/sections/appointment-section";
 import Footer from "@/components/footer/footer";
-import { DoctorsCarousel } from "./home/doctors";
+import { DoctorsCarousel } from "../components/home/doctors";
+import WhyChooseUsSection from "@/components/home/why-choose-us";
+import MedicalTechnologySection from "@/components/home/medical-technology";
 export default function Page() {
   // console.log("test");
   return (
@@ -22,10 +24,12 @@ export default function Page() {
       <CardSection />
       <SectionAbout />
       <Statistics />
+      <MedicalTechnologySection />
       <Offer />
       <DoctorsCarousel />
       <MedicalDepartments />
       <Testimomials />
+      <WhyChooseUsSection />
       <Frontline />
       <div className="bg-gradient-section py-3xl w-full">
         <AppointmentSection />

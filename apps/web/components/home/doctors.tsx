@@ -14,8 +14,10 @@ import {
 // import { Badge } from "@repo/ui";
 import { Mail } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Doctor = {
+  id: string;
   name: string;
   designation: string;
   image: string;
@@ -26,6 +28,7 @@ type Doctor = {
 
 const DOCTORS: Doctor[] = [
   {
+    id: "dr-jane-smith",
     name: "Dr. Ishaan Kapoor",
     designation: "Chief Cardiologist",
     image: "/doct-1.png",
@@ -34,6 +37,7 @@ const DOCTORS: Doctor[] = [
     email: "mailto:ishaan.kapoor@medicare.com",
   },
   {
+    id: "dr-jane-smith",
     name: "Dr. Meera Joshi",
     designation: "General Physician",
     image: "/doct-2.png",
@@ -42,6 +46,7 @@ const DOCTORS: Doctor[] = [
     email: "mailto:meera.joshi@medicare.com",
   },
   {
+    id: "dr-jane-smith",
     name: "Dr. Arjun Malhotra",
     designation: "Head of Radiology",
     image: "/doct-3.png",
@@ -50,6 +55,7 @@ const DOCTORS: Doctor[] = [
     email: "mailto:arjun.malhotra@medicare.com",
   },
   {
+    id: "dr-jane-smith",
     name: "Dr. Priya Nair",
     designation: "Oncology Specialist",
     image: "/doct-4.png",
@@ -58,6 +64,7 @@ const DOCTORS: Doctor[] = [
     email: "mailto:priya.nair@medicare.com",
   },
   {
+    id: "dr-jane-smith",
     name: "Dr. Aditya Rao",
     designation: "Senior Neurologist",
     image: "/doct-5.png",
@@ -65,6 +72,7 @@ const DOCTORS: Doctor[] = [
     email: "mailto:aditya.rao@medicare.com",
   },
   {
+    id: "dr-jane-smith",
     name: "Dr. Sneha Kulkarni",
     designation: "Gynecologist",
     image: "/doct-6.png",
@@ -122,27 +130,28 @@ export function DoctorsCarousel() {
                     isActive && "p-0 h-[calc(100%+40px)]",
                   )}
                 >
-                  <div
-                    className={cn(
-                      "aspect-square h-62 w-full overflow-hidden rounded-xl bg-secondary p-4 pb-0 transition duration-300",
-                      isActive && "bg-gradient-card h-full w-full",
-                    )}
-                  >
-                    <Image
-                      src={doctor.image}
-                      alt={doctor.name}
-                      height={200}
-                      width={200}
+                  <Link href={`/doctors/${doctor.id}`} className="block h-full">
+                    <div
                       className={cn(
-                        "h-full w-full object-contain transition duration-300",
-                        isActive && "object-contain",
+                        "aspect-square h-62 w-full overflow-hidden rounded-xl bg-secondary p-4 pb-0 transition duration-300",
+                        isActive && "bg-gradient-card h-full w-full",
                       )}
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
-
+                    >
+                      <Image
+                        src={doctor.image}
+                        alt={doctor.name}
+                        height={200}
+                        width={200}
+                        className={cn(
+                          "h-full w-full object-contain transition duration-300",
+                          isActive && "object-contain",
+                        )}
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  </Link>
                   {/* Name, designation, socials — becomes an overlay when active */}
                   <div
                     className={cn(

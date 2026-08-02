@@ -6,7 +6,7 @@ import { Activity, ArrowRight } from "lucide-react";
 import Image from "next/image";
 export default function Banner() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-gradient-primary w-full">
+    <section className="relative overflow-hidden glass-panel w-full">
       <div className="container grid grid-cols-1 gap-2xl py-2xl pb-0 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Left column — copy + CTAs */}
         <div className="flex flex-col items-start gap-md ">
@@ -33,9 +33,7 @@ export default function Banner() {
               <ArrowRight className="size-icon" aria-hidden="true" />
             </Button>
             {/* <Button className="text-background" variant="primary" href="#book">Book an Appointment  <ArrowRight className="size-icon" aria-hidden="true" /></Button> */}
-            <Button variant={"outline"} className="hover:bg-surface-secondary">
-              Explore Departments
-            </Button>
+            <Button variant={"outline"}>Explore Departments</Button>
           </div>
 
           {/* Trust row */}

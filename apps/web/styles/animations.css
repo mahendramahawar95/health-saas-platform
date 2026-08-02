@@ -1,0 +1,278 @@
+/* ==========================================================================
+   ANIMATIONS
+   Import into global.css:  @import "./animations.css";
+   (place the @import after your @theme block so the CSS vars are available)
+
+   Classes that only need CSS: animate-fade-up, stagger-item, hover-lift,
+   skeleton, ripple base, accordion, progress, view-transitions.
+
+   Classes that need a small JS hook, and why:
+   - .reveal / .reveal-visible  â†’ toggle "reveal-visible" on with an
+     IntersectionObserver when the element enters the viewport.
+   - .stagger-item              â†’ set style={{ "--stagger-index": i }} on
+     each child (index i) so the delays cascade.
+   - .ripple                    â†’ append a positioned <span class="ripple">
+     at the click coordinates on pointerdown, remove after ~600ms.
+   - .counter                   â†’ the pure-CSS version below uses
+     @property, which needs Baseline-2024 browser support; for guaranteed
+     cross-browser counting, animate the number in JS (rAF or a small
+     "useCountUp" hook) instead and skip the --num trick.
+   - page transitions           â†’ wire document.startViewTransition() (or
+     the "next-view-transitions" package) around your route change.
+   ========================================================================== */
+
+/* ---- Fade up (single element, animates immediately on mount) ---- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+/* ---- Scroll reveal (pairs with an IntersectionObserver toggling
+   the "reveal-visible" class) ---- */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Staggered card entrances ----
+   Usage: <div class="stagger-item" style={{ "--stagger-index": i }}> */
+@utility stagger-item {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.5s ease-out both;
+  animation-delay: calc(var(--stagger-index, 0) * 90ms);
+}
+
+/* Pure-CSS fallback for static (non-mapped) markup, first 8 children */
+.stagger > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 270ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 360ms;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 450ms;
+}
+.stagger > *:nth-child(7) {
+  animation-delay: 540ms;
+}
+.stagger > *:nth-child(8) {
+  animation-delay: 630ms;
+}
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.5s ease-out both;
+}
+
+/* ---- Hover lift ---- */
+@utility hover-lift {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ---- Button ripple ----
+   Usage: <button class="ripple-host">...<span class="ripple" style={{ left, top, width, height }} /></button> */
+@utility ripple-host {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  transform: scale(0);
+  background: oklch(100% 0 0 / 0.35);
+  pointer-events: none;
+  animation: ripple-expand 600ms ease-out forwards;
+}
+
+@keyframes ripple-expand {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* ---- Animated counters (progressive enhancement) ----
+   Usage: <span class="counter" style={{ "--counter-to": 240 }} /> */
+@property --num {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.counter {
+  --num: 0;
+  counter-reset: num var(--num);
+  animation: counter-up 2s ease-out forwards;
+}
+
+.counter::before {
+  content: counter(num);
+}
+
+@keyframes counter-up {
+  to {
+    --num: var(--counter-to, 100);
+  }
+}
+
+/* ---- Smooth accordion (no fixed heights, no JS measuring) ----
+   Usage: <div class="accordion-item" data-open={open}>
+            <div class="accordion-content"><div>...content...</div></div>
+          </div> */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.accordion-content > div {
+  overflow: hidden;
+}
+
+.accordion-item[data-open="true"] .accordion-content {
+  grid-template-rows: 1fr;
+}
+
+/* ---- Progress indicators ---- */
+/* Linear: <div class="progress-track"><div class="progress-bar" style={{ "--progress": "60%" }} /></div> */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-xs);
+  background: var(--color-secondary);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: var(--progress, 0%);
+  background: var(--color-primary);
+  border-radius: inherit;
+  transition: width 500ms ease;
+}
+
+/* Circular: <circle pathLength={100} class="progress-ring" style={{ "--progress": 60 }} /> */
+.progress-ring {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--progress, 0));
+  transition: stroke-dashoffset 500ms ease;
+}
+
+/* ---- Skeleton loading states ---- */
+@keyframes skeleton-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@utility skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary) 25%,
+    var(--color-border) 37%,
+    var(--color-secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+/* ---- Page transitions (native View Transitions API) ---- */
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out 200ms ease forwards;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in 250ms ease forwards;
+}
+
+/* ---- Reduced motion: disable every animation/transition above ---- */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .reveal,
+    .reveal-visible,
+    .stagger-item,
+    .stagger > *,
+    .hover-lift,
+    .ripple,
+    .counter,
+    .accordion-content,
+    .progress-bar,
+    .progress-ring,
+    .skeleton,
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .hover-lift:hover {
+      transform: none;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .counter::before {
+      content: counter(num, var(--counter-to, 100));
+    }
+  }
+}

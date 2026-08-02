@@ -1,17 +1,15 @@
-import { ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 import { VariantProps } from "class-variance-authority";
 import { buttonVariants } from "./button.variants";
 
 type BaseProps = VariantProps<typeof buttonVariants>;
 
-export type ButtonAsButton = BaseProps & {
+export interface ButtonAsButton
+  extends BaseProps,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   href?: undefined;
   isLoading?: boolean;
   loadingText?: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+}
 
-export type ButtonAsAnchor = BaseProps & {
-  href: string;
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
-
-export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
+export type ButtonProps = ButtonAsButton;

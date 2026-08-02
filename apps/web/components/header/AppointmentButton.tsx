@@ -3,8 +3,12 @@ import { Button } from "@repo/ui";
 
 export default function AppointmentButton() {
   return (
-    <Button variant={"primary"} className="text-background">
-      <Link href="/appointment">Book Appointment</Link>
+    <Button
+      variant={"primary"}
+      size="sm"
+      className="text-background rounded-sm"
+    >
+      <Link href="/appointment">Contact us</Link>
     </Button>
   );
 }

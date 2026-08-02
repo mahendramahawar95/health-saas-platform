@@ -15,6 +15,7 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 type Department = {
   name: string;
@@ -112,9 +113,9 @@ export default function MedicalDepartments() {
 
         <div className="grid grid-cols-2 gap-sm sm:grid-cols-3 lg:grid-cols-4">
           {DEPARTMENTS.map(({ name, index, description, icon: Icon }) => (
-            <a
+            <Link
+              href={`/departments/${name.toLowerCase()}`}
               key={name}
-              href={`#department-${name.toLowerCase()}`}
               className="group flex flex-col gap-sm rounded-lg border border-border bg-card p-md shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md"
             >
               <div className="flex items-center justify-between">
@@ -131,7 +132,7 @@ export default function MedicalDepartments() {
                 View doctors
                 <ArrowRight className="size-3.5" aria-hidden="true" />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

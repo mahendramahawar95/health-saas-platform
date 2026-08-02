@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Frontline() {
   return (
-    <Section id="frontline" className="bg-section-first py-3xl pt-0">
+    <Section id="frontline" className="bg-section-first py-3xl">
       <div className="container">
         <SectionHeading
           badgeClass="bg-badge-tag p-2 text-primary font-bold"
