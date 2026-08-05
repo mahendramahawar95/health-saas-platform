@@ -1,0 +1,506 @@
+@import "tailwindcss";
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
+/* @import "./animations.css"; */
+
+/* ==========================================================================
+   ANIMATIONS
+   Import into global.css:  @import "./animations.css";
+   (place the @import after your @theme block so the CSS vars are available)
+
+   Classes that only need CSS: animate-fade-up, stagger-item, hover-lift,
+   skeleton, ripple base, accordion, progress, view-transitions.
+
+   Classes that need a small JS hook, and why:
+   - .reveal / .reveal-visible  â†’ toggle "reveal-visible" on with an
+     IntersectionObserver when the element enters the viewport.
+   - .stagger-item              â†’ set style={{ "--stagger-index": i }} on
+     each child (index i) so the delays cascade.
+   - .ripple                    â†’ append a positioned <span class="ripple">
+     at the click coordinates on pointerdown, remove after ~600ms.
+   - .counter                   â†’ the pure-CSS version below uses
+     @property, which needs Baseline-2024 browser support; for guaranteed
+     cross-browser counting, animate the number in JS (rAF or a small
+     "useCountUp" hook) instead and skip the --num trick.
+   - page transitions           â†’ wire document.startViewTransition() (or
+     the "next-view-transitions" package) around your route change.
+   ========================================================================== */
+
+/* ---- Fade up (single element, animates immediately on mount) ---- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+/* ---- Scroll reveal (pairs with an IntersectionObserver toggling
+   the "reveal-visible" class) ---- */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Staggered card entrances ----
+   Usage: <div class="stagger-item" style={{ "--stagger-index": i }}> */
+@utility stagger-item {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.5s ease-out both;
+  animation-delay: calc(var(--stagger-index, 0) * 90ms);
+}
+
+/* Pure-CSS fallback for static (non-mapped) markup, first 8 children */
+.stagger > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 270ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 360ms;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 450ms;
+}
+.stagger > *:nth-child(7) {
+  animation-delay: 540ms;
+}
+.stagger > *:nth-child(8) {
+  animation-delay: 630ms;
+}
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.5s ease-out both;
+}
+
+/* ---- Hover lift ---- */
+@utility hover-lift {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ---- Button ripple ----
+   Usage: <button class="ripple-host">...<span class="ripple" style={{ left, top, width, height }} /></button> */
+@utility ripple-host {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  transform: scale(0);
+  background: oklch(100% 0 0 / 0.35);
+  pointer-events: none;
+  animation: ripple-expand 600ms ease-out forwards;
+}
+
+@keyframes ripple-expand {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* ---- Animated counters (progressive enhancement) ----
+   Usage: <span class="counter" style={{ "--counter-to": 240 }} /> */
+@property --num {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.counter {
+  --num: 0;
+  counter-reset: num var(--num);
+  animation: counter-up 2s ease-out forwards;
+}
+
+.counter::before {
+  content: counter(num);
+}
+
+@keyframes counter-up {
+  to {
+    --num: var(--counter-to, 100);
+  }
+}
+
+/* ---- Smooth accordion (no fixed heights, no JS measuring) ----
+   Usage: <div class="accordion-item" data-open={open}>
+            <div class="accordion-content"><div>...content...</div></div>
+          </div> */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.accordion-content > div {
+  overflow: hidden;
+}
+
+.accordion-item[data-open="true"] .accordion-content {
+  grid-template-rows: 1fr;
+}
+
+/* ---- Progress indicators ---- */
+/* Linear: <div class="progress-track"><div class="progress-bar" style={{ "--progress": "60%" }} /></div> */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-xs);
+  background: var(--color-secondary);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: var(--progress, 0%);
+  background: var(--color-primary);
+  border-radius: inherit;
+  transition: width 500ms ease;
+}
+
+/* Circular: <circle pathLength={100} class="progress-ring" style={{ "--progress": 60 }} /> */
+.progress-ring {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--progress, 0));
+  transition: stroke-dashoffset 500ms ease;
+}
+
+/* ---- Skeleton loading states ---- */
+@keyframes skeleton-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@utility skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary) 25%,
+    var(--color-border) 37%,
+    var(--color-secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+/* ---- Page transitions (native View Transitions API) ---- */
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out 200ms ease forwards;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in 250ms ease forwards;
+}
+
+/* ---- Reduced motion: disable every animation/transition above ---- */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .reveal,
+    .reveal-visible,
+    .stagger-item,
+    .stagger > *,
+    .hover-lift,
+    .ripple,
+    .counter,
+    .accordion-content,
+    .progress-bar,
+    .progress-ring,
+    .skeleton,
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .hover-lift:hover {
+      transform: none;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .counter::before {
+      content: counter(num, var(--counter-to, 100));
+    }
+  }
+}
+
+.dark {
+  --color-background: oklch(18% 0 0);
+  --color-foreground: oklch(98% 0 0);
+  --color-card: oklch(22% 0 0);
+}
+@utility container {
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+}
+
+@keyframes ekg-draw {
+  from {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@utility animate-ekg {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: ekg-draw 1.8s ease-out 0.2s forwards;
+}
+
+@utility animate-pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ekg,
+    .animate-pulse-dot {
+      animation: none;
+    }
+  }
+}
+
+@theme {
+  /* FONTS */
+  --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* COLORS */
+
+  --color-accent: oklch(76.9% 0.188 70.08); /* #F59E0B */
+  --color-success: oklch(72.3% 0.219 149.579); /* #22C55E */
+  --color-background: oklch(98.4% 0.003 247.858); /* #F8FAFC */
+  --color-surface: oklch(100% 0 0); /* #FFFFFF */
+  --color-foreground: oklch(20.8% 0.042 265.755); /* #0F172A */
+  --color-muted: oklch(55.4% 0.046 257.417); /* #64748B */
+  --color-content-secondary: var(--color-muted);
+  --color-section-first: oklch(0.98 0.01 275.14);
+  --color-section-second: oklch(0.95 0.02 269.55);
+  --color-section-third: oklch(1 0 0);
+  --color-section-fourth: oklch(0.95 0.02 244.21);
+  --color-section-fifth: oklch(0.95 0.02 270.45);
+  --color-primary: oklch(0.39 0.13 255.58);
+  --color-secondary: oklch(96% 0.01 250);
+  --color-card-bg: oklch(0.92 0.02 250.49);
+  --color-section: oklch(0.98 0.01 275.14);
+  --color-surface-secondary: oklch(98% 0.003 250);
+  --color-content-secondary: oklch(55% 0.01 250);
+  --color-border: oklch(92% 0.01 250);
+  --color-overlay: oklch(0% 0 0 / 0.4);
+  --color-badge-tag: oklch(0.89 0.21 147.89);
+
+  /* RADIUS */
+  --radius-card: 20px;
+  --radius-button: 14px;
+  --radius-input: 16px;
+
+  /* SHADOWS */
+  --shadow-card-soft:
+    0 1px 2px oklch(0% 0 0 / 0.04), 0 8px 16px oklch(0% 0 0 / 0.06),
+    0 24px 48px oklch(0% 0 0 / 0.06);
+  /* GRADIENTS */
+  --background-image-gradient-primary: linear-gradient(
+    45deg,
+    oklch(91.4% 0.022 240),
+    oklch(76.5% 0.076 243),
+    oklch(90.6% 0.023 233)
+  );
+  --background-image-gradient-secondary: linear-gradient(
+    45deg,
+    oklch(58.2% 0.074 243),
+    oklch(72.7% 0.07 241),
+    oklch(58.2% 0.074 243)
+  );
+
+  --background-image-gradient-section: linear-gradient(
+    to top,
+    oklch(0.95 0.02 244.21),
+    oklch(0.95 0.02 270.45)
+  );
+
+  --background-image-gradient-card: linear-gradient(
+    to bottom,
+    oklch(0.62 0.07 247.76),
+    oklch(0.95 0.02 265.87)
+  );
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.05);
+  --shadow-md: 0 4px 8px oklch(0% 0 0 / 0.08);
+  --shadow-lg: 0 8px 24px oklch(0% 0 0 / 0.12);
+
+  /* Header */
+  --shadow-header:
+    0 1px 3px oklch(0% 0 0 / 0.08), 0 4px 12px oklch(0% 0 0 / 0.05);
+  --spacing-card: 24px;
+
+  --z-index-card: 10;
+
+  --spacing-icon: 24px;
+  /* --color-success: oklch(72% 0.17 145); */
+  --color-warning: oklch(82% 0.17 85);
+  --color-danger: oklch(64% 0.23 25);
+
+  /* --color-background: oklch(100% 0 0); */
+  /* --color-foreground: oklch(18% 0 0); */
+  --color-card: oklch(0.96 0.01 248.12 / 1);
+
+  /* TYPOGRAPHY */
+  --text-display: clamp(3rem, 5vw, 5rem);
+
+  --text-h1: clamp(2.5rem, 4vw, 4rem);
+  --text-h2: clamp(2rem, 3vw, 3rem);
+  --text-h3: clamp(1.75rem, 2.5vw, 2.5rem);
+  --text-h4: clamp(1.5rem, 2vw, 2rem);
+  --text-h5: clamp(1.25rem, 1.5vw, 1.5rem);
+
+  --text-body-lg: clamp(1.125rem, 1vw, 1.25rem);
+  --text-body: clamp(1rem, 1vw, 1.125rem);
+
+  --text-small: clamp(0.875rem, 0.8vw, 1rem);
+  --text-xs: clamp(0.75rem, 0.7vw, 0.875rem);
+
+  /* SPACING */
+  --spacing-xs: 0.5rem; /* 8px */
+
+  --spacing-sm: clamp(0.75rem, 0.65rem + 0.4vw, 1rem); /* 12px → 16px */
+  --spacing-md: clamp(1rem, 0.85rem + 0.6vw, 1.5rem); /* 16px → 24px */
+  --spacing-lg: clamp(1.25rem, 1rem + 1vw, 2rem); /* 20px → 32px */
+  --spacing-xl: clamp(1.75rem, 1.3rem + 1.8vw, 3rem); /* 28px → 48px */
+  --spacing-2xl: clamp(2rem, 1.4rem + 2.4vw, 4rem); /* 32px → 64px */
+  --spacing-3xl: clamp(2.5rem, 1.4rem + 4.4vw, 6rem); /* 40px → 96px */
+
+  /* RADIUS */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* LAYOUT */
+  --container-default: 1440px;
+  --container-wide: 1600px;
+
+  --navbar-height: 72px;
+  --sidebar-width: 280px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* ---- Glassmorphism overlay (hero section) ----
+   Usage: <div class="relative">
+            <img class="hero-bg" .../>
+            <div class="glass-panel">...</div>
+          </div> */
+@utility glass-panel {
+  background: oklch(100% 0 0 / 0.12);
+  backdrop-filter: blur(16px) saturate(160%);
+  /* -webkit-backdrop-filter: blur(16px) saturate(160%); */
+  border: 1px solid oklch(100% 0 0 / 0.25);
+  /* box-shadow: var(--shadow-card-soft); */
+}
+
+/* Dark surfaces (e.g. text/icons sitting on the glass panel over a photo) */
+@utility glass-panel-dark {
+  background: oklch(0% 0 0 / 0.35);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid oklch(100% 0 0 / 0.12);
+  box-shadow: var(--shadow-card-soft);
+}
