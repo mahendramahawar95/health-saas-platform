@@ -1,23 +1,21 @@
 "use client";
 
-import { Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import {
   SettingsNav,
   GeneralSettingsPanel,
   ClinicSettingsPanel,
   NotificationSettingsPanel,
+  EmailSettingsPanel,
+  PaymentsSettingsPanel,
+  AppearanceSettingsPanel,
+  UsersSettingsPanel,
+  RolesSettingsPanel,
   type SettingsTabKey,
 } from "@repo/ui";
 
-function SettingsPageContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const active = (searchParams.get("tab") as SettingsTabKey) || "general";
-
-  function goToTab(key: SettingsTabKey) {
-    router.push(key === "general" ? "/settings" : `/settings?tab=${key}`);
-  }
+export default function SettingsPage() {
+  const [active, setActive] = useState<SettingsTabKey>("general");
 
   return (
     <div className="flex flex-col gap-4">
@@ -28,23 +26,20 @@ function SettingsPageContent() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 sm:flex-row lg:items-start">
-        <SettingsNav active={active} onChange={goToTab} />
+      <div className="flex flex-col gap-6 lg:flex-row! lg:items-start">
+        <SettingsNav active={active} onChange={setActive} />
 
         <div className="min-w-0 flex-1">
           {active === "general" && <GeneralSettingsPanel />}
           {active === "clinic" && <ClinicSettingsPanel />}
           {active === "notifications" && <NotificationSettingsPanel />}
+          {active === "email" && <EmailSettingsPanel />}
+          {active === "payments" && <PaymentsSettingsPanel />}
+          {active === "appearance" && <AppearanceSettingsPanel />}
+          {active === "users" && <UsersSettingsPanel />}
+          {active === "roles" && <RolesSettingsPanel />}
         </div>
       </div>
     </div>
-  );
-}
-
-export default function SettingsPage() {
-  return (
-    <Suspense fallback={null}>
-      <SettingsPageContent />
-    </Suspense>
   );
 }

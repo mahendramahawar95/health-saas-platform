@@ -12,10 +12,6 @@ export * from "./components/section/section";
 export * from "./components/section-heading/section-heading";
 // packages/ui/src/index.ts
 export * from "./breadcrumb/breadcrumb";
-export * from "./doctor-header/doctor-header";
-export * from "./detail-card/detail-card";
-export * from "./sidebar-card/sidebar-card";
-export * from "./doctor-detail-page/doctor-detail-page";
 
 export { default as DashboardShell } from "./components/dashboard/layout/DashboardShell";
 export { default as Sidebar } from "./components/dashboard/layout/Sidebar";
@@ -55,13 +51,17 @@ export type { DoctorRow } from "./components/dashboard/doctors/DoctorsTable";
 export { DoctorForm } from "./components/dashboard/doctors/DoctorForm";
 // export type { DoctorFormValues } from "./components/dashboard/doctors/DoctorForm";
 export { DoctorsPageClient } from "./components/dashboard/doctors/DoctorsPageClient";
-export { doctors } from "./components/dashboard/doctors/doctors";
+export {
+  doctors,
+  getDoctorByIdOrSlug,
+} from "./components/dashboard/doctors/doctors";
 export { DoctorModal } from "./components/dashboard/doctors/DoctorModal";
 export {
   DOCTOR_STATUS_CLASSES,
   type DoctorStatus,
 } from "./components/dashboard/doctors/DoctorStatus";
 export { SAMPLE_DOCTORS } from "./components/dashboard/doctors/sample-doctors";
+export { DoctorDetailsView } from "./components/dashboard/doctors/DoctorDetailsView";
 
 // ── Settings ────────────────────────────────────────────
 export { default as SettingsNav } from "./components/dashboard/settings/SettingsNav";
@@ -74,7 +74,11 @@ export {
 export { default as GeneralSettingsPanel } from "./components/dashboard/settings/ClinicSettingsPanel";
 export { default as ClinicSettingsPanel } from "./components/dashboard/settings/ClinicSettingsPanel";
 export { default as NotificationSettingsPanel } from "./components/dashboard/settings/NotificationSettingsPanel";
-
+export { default as AppearanceSettingsPanel } from "./components/dashboard/settings/AppearanceSettingsPanel";
+export { default as EmailSettingsPanel } from "./components/dashboard/settings/EmailSettingsPanel";
+export { default as PaymentsSettingsPanel } from "./components/dashboard/settings/PaymentsSettingsPanel";
+export { default as RolesSettingsPanel } from "./components/dashboard/settings/RolesSettingsPanel";
+export { default as UsersSettingsPanel } from "./components/dashboard/settings/UsersSettingsPanel";
 // ── Dashboard widgets (presentational cards) ───────────
 export { default as StatCard } from "./components/dashboard/widgets/StatCard";
 export { default as VitalsCard } from "./components/dashboard/widgets/VitalsCard";

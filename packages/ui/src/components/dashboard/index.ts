@@ -52,6 +52,11 @@ export {
 export { default as GeneralSettingsPanel } from "./settings/ClinicSettingsPanel";
 export { default as ClinicSettingsPanel } from "./settings/ClinicSettingsPanel";
 export { default as NotificationSettingsPanel } from "./settings/NotificationSettingsPanel";
+export { default as AppearanceSettingsPanel } from "./settings/AppearanceSettingsPanel";
+export { default as EmailSettingsPanel } from "./settings/EmailSettingsPanel";
+export { default as PaymentsSettingsPanel } from "./settings/PaymentsSettingsPanel";
+export { default as RolesSettingsPanel } from "./settings/RolesSettingsPanel";
+export { default as UsersSettingsPanel } from "./settings/UsersSettingsPanel";
 
 // ── Dashboard widgets (presentational cards) ───────────
 export { default as StatCard } from "./widgets/StatCard";
