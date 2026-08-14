@@ -5,10 +5,10 @@ export default function AppointmentButton() {
   return (
     <Button
       variant={"primary"}
-      size="sm"
+      size="md"
       className="text-background rounded-sm"
     >
-      <Link href="/appointment">Contact us</Link>
+      <Link href="/login">Login</Link>
     </Button>
   );
 }

@@ -130,12 +130,15 @@ export function DoctorsCarousel() {
                     isActive && "p-0 h-[calc(100%+40px)]",
                   )}
                 >
-                  <Link href={`/doctors/${doctor.id}`} className="block h-full">
-                    <div
-                      className={cn(
-                        "aspect-square h-62 w-full overflow-hidden rounded-xl bg-secondary p-4 pb-0 transition duration-300",
-                        isActive && "bg-gradient-card h-full w-full",
-                      )}
+                  <div
+                    className={cn(
+                      "aspect-square h-62 w-full overflow-hidden rounded-xl bg-secondary p-4 pb-0 transition duration-300",
+                      isActive && "bg-gradient-card h-full w-full",
+                    )}
+                  >
+                    <Link
+                      href={`/doctors/${doctor.id}`}
+                      className="block h-full"
                     >
                       <Image
                         src={doctor.image}
@@ -150,8 +153,9 @@ export function DoctorsCarousel() {
                           e.currentTarget.style.display = "none";
                         }}
                       />
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
+
                   {/* Name, designation, socials — becomes an overlay when active */}
                   <div
                     className={cn(
