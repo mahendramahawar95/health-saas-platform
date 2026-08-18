@@ -5,8 +5,15 @@ import Image from "next/image";
 
 export default function AppointmentSection() {
   return (
-    <Section id="appointment-form">
-      <div className="container">
+    <Section id="appointment-form" className="relative pb-0 py-3xl w-full">
+      <Image
+        src="/appointment.png"
+        alt=""
+        fill
+        priority
+        className="object-cover inset-0"
+      />
+      <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-4 items-center">
           {/* <div className="">
           <div
@@ -73,13 +80,13 @@ export default function AppointmentSection() {
           </Card>
         </div> */}
           <div className="image-appintment">
-            <Image
-              src="/lungs.png"
+            {/* <Image
+              src="/departgif-8.png"
               alt="lungs"
-              width={450}
-              height={450}
-              className="m-auto"
-            />
+              width={800}
+              height={800}
+              className="m-auto h-full w-full"
+            /> */}
           </div>
           <AppointmentForm />
         </div>

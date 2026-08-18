@@ -4,10 +4,18 @@
 import { Badge, Button } from "@repo/ui";
 import { Activity, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import CardSection from "./card-section";
 export default function Banner() {
   return (
     <section className="relative overflow-hidden glass-panel w-full">
-      <div className="container grid grid-cols-1 gap-2xl py-2xl pb-0 lg:grid-cols-[1.1fr_0.9fr]">
+      <Image
+        src="/bg-banner-2.png"
+        alt=""
+        fill
+        priority
+        className="object-cover object-top top-0! bottom-auto! h-[86%]!"
+      />
+      <div className="container relative z-10 grid grid-cols-1 gap-2xl py-2xl pb-0 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Left column — copy + CTAs */}
         <div className="flex flex-col items-start gap-md ">
           <Badge className="inline-flex items-center rounded-xs text-primary p-2 text-md font-bold bg-white">
@@ -71,6 +79,7 @@ export default function Banner() {
           />
         </div>
       </div>
+      <CardSection />
     </section>
   );
 }

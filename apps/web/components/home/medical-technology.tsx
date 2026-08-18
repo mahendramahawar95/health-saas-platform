@@ -9,16 +9,49 @@ import {
   Scissors,
   Siren,
 } from "lucide-react";
+import Image from "next/image";
 
 const technologies = [
-  { icon: Scan, label: "MRI" },
-  { icon: ScanLine, label: "CT Scan" },
-  { icon: FlaskConical, label: "Laboratory" },
-  { icon: Scissors, label: "Operation Theater" },
-  { icon: BedDouble, label: "ICU" },
-  { icon: Siren, label: "Emergency" },
-  { icon: Bot, label: "Robotics" },
-  { icon: Ambulance, label: "Ambulance" },
+  {
+    icon: Scan,
+    label: "MRI",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: ScanLine,
+    label: "CT Scan",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: FlaskConical,
+    label: "Laboratory",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: Scissors,
+    label: "Operation Theater",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: BedDouble,
+    label: "ICU",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: Siren,
+    label: "Emergency",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: Bot,
+    label: "Robotics",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
+  {
+    icon: Ambulance,
+    label: "Ambulance",
+    desc: "Lorem ipsum dolor sit amet, consectet commodi sit veniam adipisicing.",
+  },
 ];
 
 export default function MedicalTechnologySection() {
@@ -38,20 +71,56 @@ export default function MedicalTechnologySection() {
           </p>
         </div>
 
-        <div className="mt-xl grid grid-cols-2 gap-md sm:grid-cols-4">
-          {technologies.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center gap-3 rounded-lg border border-border bg-card px-md py-lg text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
-            >
-              <div className="flex size-icon items-center justify-center rounded-full bg-primary/10 text-primary">
-                <Icon className="size-6" aria-hidden="true" />
+        <div className="mt-xl items-center grid grid-cols-2 gap-md sm:grid-cols-3">
+          <div className="left-box">
+            {technologies.slice(0, 3).map(({ icon: Icon, label, desc }) => (
+              <div
+                key={label}
+                className="flex group items-center gap-3 rounded-lg border-transparent hover:border-border hover:bg-card px-md py-lg text-center hover:shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+              >
+                <div className="desc-box text-right">
+                  <h5 className="text-h5 font-medium text-foreground">
+                    {label}
+                  </h5>
+                  <p className="mt-3 text-small text-content-secondary">
+                    {desc}
+                  </p>
+                </div>
+                <div className="flex  items-center justify-center rounded-full bg-white group-hover:bg-primary/10 transition-all duration-300 group-hover:shadow-none shadow-md text-primary p-4">
+                  <Icon className="size-10" aria-hidden="true" />
+                </div>
               </div>
-              <span className="text-small font-medium text-foreground">
-                {label}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="image-box">
+            <Image
+              src="/departgif-2.png"
+              alt="technology"
+              width={800}
+              height={800}
+              className="w-full animate-palpitation h-full object-fit right "
+            />
+          </div>
+          <div className="right-box">
+            {technologies.slice(3, 6).map(({ icon: Icon, label, desc }) => (
+              <div
+                key={label}
+                className="flex group items-center gap-3 rounded-lg border-transparent hover:border-border hover:bg-card px-md py-lg text-center hover:shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+              >
+                <div className="flex  items-center justify-center rounded-full bg-white group-hover:bg-primary/10 transition-all duration-300 group-hover:shadow-none shadow-md text-primary p-4">
+                  <Icon className="size-10" aria-hidden="true" />
+                </div>
+                <div className="desc-box text-left">
+                  <h5 className="text-h5 font-medium text-foreground">
+                    {label}
+                  </h5>
+                  <p className="mt-3 text-small text-content-secondary">
+                    {desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>

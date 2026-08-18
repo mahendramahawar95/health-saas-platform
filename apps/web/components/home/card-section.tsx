@@ -3,13 +3,13 @@ import Image from "next/image";
 
 export default function CardSection() {
   return (
-    <Section id="hero-cards" className="bg-section-first py-3xl">
+    <Section id="hero-cards" className="relative z-10">
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-4 ">
         <Card className=" hover:bg-gradient-secondary hover:text-white hover:border-transparent">
           <div className="grid items-center grid-cols-2 gap-4">
             <div>
               <Image
-                src="/mind.png"
+                src="/departgif-1.png"
                 alt="Hero"
                 width={600}
                 height={600}
@@ -29,7 +29,7 @@ export default function CardSection() {
           <div className="grid items-center grid-cols-2 gap-4">
             <div>
               <Image
-                src="/liver.png"
+                src="/liver-gif.png"
                 alt="Hero"
                 width={600}
                 height={600}
@@ -51,7 +51,7 @@ export default function CardSection() {
           <div className="grid items-center grid-cols-2 gap-4">
             <div>
               <Image
-                src="/kidney.png"
+                src="/departgif-11.png"
                 alt="Hero"
                 width={600}
                 height={600}

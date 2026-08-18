@@ -1,38 +1,3 @@
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselPrevious,
-//   CarouselNext,
-//   CarouselDots,
-// } from "@repo/ui";
-
-// export default function Testimomials() {
-//   return (
-//     <section className="docters w-full">
-//       <div className="container">
-//         <Carousel
-//           opts={{ align: "center", loop: true }}
-//           className="w-full mx-auto"
-//         >
-//           <CarouselContent>
-//             {[1, 2, 3, 4, 5].map((n) => (
-//               <CarouselItem key={n} className="basis-[30%]">
-//                 <div className="bg-gradient-primary rounded-xl p-8 h-48 flex items-center justify-center">
-//                   Slide {n}
-//                 </div>
-//               </CarouselItem>
-//             ))}
-//           </CarouselContent>
-//           <CarouselPrevious />
-//           <CarouselNext />
-//           <CarouselDots />
-//         </Carousel>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 import {
   Carousel,
@@ -43,12 +8,14 @@ import {
 } from "@repo/ui";
 
 import { Quote, Star } from "lucide-react";
+import Image from "next/image";
 
 type Testimonial = {
   quote: string;
   name: string;
   role: string;
   rating: number;
+  image: string;
 };
 
 const TESTIMONIALS: Testimonial[] = [
@@ -58,6 +25,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Ananya Verma",
     role: "Patient — Cardiology",
     rating: 5.0,
+    image: "/testimonial.avif",
   },
   {
     quote:
@@ -65,6 +33,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Rohan Mehta",
     role: "Patient — Orthopedics",
     rating: 5.0,
+    image: "/testimonial.avif",
   },
   {
     quote:
@@ -72,6 +41,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Priya Nair",
     role: "Patient — Oncology",
     rating: 4.9,
+    image: "/testimonial.avif",
   },
   {
     quote:
@@ -79,6 +49,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Aditya Rao",
     role: "Patient — Neurology",
     rating: 5.0,
+    image: "/testimonial.avif",
   },
   {
     quote:
@@ -86,6 +57,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Sneha Kulkarni",
     role: "Patient — Gynecology",
     rating: 4.8,
+    image: "/testimonial.avif",
   },
   {
     quote:
@@ -93,6 +65,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Vikram Singh",
     role: "Patient — General Medicine",
     rating: 4.9,
+    image: "/testimonial.avif",
   },
 ];
 
@@ -108,30 +81,42 @@ export default function Testimomials() {
             care."
         />
 
-        <Carousel>
+        <Carousel
+          opts={{ align: "center", loop: true }}
+          className="w-full mx-auto"
+        >
           <CarouselContent>
             {TESTIMONIALS.map((t) => (
               <CarouselItem
                 key={t.name}
-                className="basis-[85%] sm:basis-[55%] lg:basis-[30%]"
+                className="basis-[85%] sm:basis-[50%] lg:basis-[33.330%]"
               >
                 <div className="flex h-full flex-col justify-between gap-md rounded-xl border border-border bg-white p-lg">
-                  <Quote className="size-6 text-primary" aria-hidden="true" />
+                  <div className="flex items-center justify-between w-full">
+                    <div className="rounded-full overflow-hidden border-border border-4">
+                      <Image
+                        src={t.image}
+                        alt={t.name}
+                        className="object-contain aspect-square "
+                        width={60}
+                        height={60}
+                        priority
+                      />
+                    </div>
+                    <Quote
+                      className="size-8 text-primary/20"
+                      aria-hidden="true"
+                    />
+                  </div>
 
-                  <p className="text-body text-foreground">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
+                  <p className="text-body text-foreground">{t.quote}</p>
 
                   <div className="flex items-center justify-between border-t border-border pt-md">
                     <div className="flex items-center gap-sm">
-                      <div
-                        className="size-10 shrink-0 rounded-full bg-gradient-secondary"
-                        aria-hidden="true"
-                      />
                       <div>
-                        <p className="text-small font-semibold text-foreground">
+                        <h6 className="text-h6 mb-1 font-semibold text-foreground">
                           {t.name}
-                        </p>
+                        </h6>
                         <p className="text-xs text-content-secondary">
                           {t.role}
                         </p>

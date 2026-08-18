@@ -11,12 +11,14 @@ export type Department = {
   stats: { label: string; value: string }[];
   services: string[];
   doctors: Doctor[];
+  image: string;
 };
 
 export const departments: Department[] = [
   {
     slug: "cardiology",
     name: "Cardiology",
+    image: "/departgif-1.png",
     tagline: "Heart care from screening to surgery",
     description:
       "Our cardiology team diagnoses and treats conditions across the full range of heart health, from routine ECGs and stress tests to complex interventional and post-surgical care.",
@@ -39,6 +41,7 @@ export const departments: Department[] = [
   {
     slug: "neurology",
     name: "Neurology",
+    image: "/departgif-2.png",
     tagline: "Care for the brain, spine, and nervous system",
     description:
       "We evaluate and manage neurological conditions including stroke, epilepsy, migraine, and movement disorders, backed by on-site imaging and a dedicated stroke unit.",
@@ -61,6 +64,7 @@ export const departments: Department[] = [
   {
     slug: "orthopedics",
     name: "Orthopedics",
+    image: "/departgif-3.png",
     tagline: "Bone, joint, and sports injury care",
     description:
       "From fractures to joint replacement, our orthopedic team combines surgical expertise with physiotherapy support to get you moving again.",
@@ -83,6 +87,7 @@ export const departments: Department[] = [
   {
     slug: "pediatrics",
     name: "Pediatrics",
+    image: "/departgif-4.png",
     tagline: "Comprehensive care for infants to teens",
     description:
       "A child-friendly environment for routine checkups, vaccinations, and treatment of childhood illnesses, staffed by pediatricians experienced across every age group.",
@@ -105,6 +110,7 @@ export const departments: Department[] = [
   {
     slug: "dermatology",
     name: "Dermatology",
+    image: "/departgif-5.png",
     tagline: "Skin, hair, and nail care",
     description:
       "Medical and cosmetic dermatology for acne, eczema, hair loss, and skin conditions, with in-house minor procedures and laser treatment.",
@@ -124,6 +130,7 @@ export const departments: Department[] = [
   {
     slug: "ent",
     name: "ENT",
+    image: "/departgif-6.png",
     tagline: "Ear, nose, and throat care",
     description:
       "Diagnosis and treatment for hearing, sinus, and throat conditions, from routine checkups to surgical care.",
@@ -143,6 +150,7 @@ export const departments: Department[] = [
   {
     slug: "oncology",
     name: "Oncology",
+    image: "/departgif-7.png",
     tagline: "Cancer screening, treatment, and support",
     description:
       "A multidisciplinary team providing early screening, chemotherapy, and coordinated care throughout cancer treatment and recovery.",
@@ -165,6 +173,7 @@ export const departments: Department[] = [
   {
     slug: "gastroenterology",
     name: "Gastroenterology",
+    image: "/departgif-8.png",
     tagline: "Digestive system diagnosis and treatment",
     description:
       "Endoscopy, liver care, and treatment for digestive disorders, from acid reflux to inflammatory bowel disease.",
@@ -184,6 +193,7 @@ export const departments: Department[] = [
   {
     slug: "dentistry",
     name: "Dentistry",
+    image: "/departgif-9.png",
     tagline: "General and cosmetic dental care",
     description:
       "Routine cleanings, restorative work, and cosmetic dentistry in a single dedicated dental wing.",
@@ -203,6 +213,7 @@ export const departments: Department[] = [
   {
     slug: "physiotherapy",
     name: "Physiotherapy",
+    image: "/departgif-10.png",
     tagline: "Rehabilitation and mobility recovery",
     description:
       "Personalized rehab programs for post-surgical recovery, sports injuries, and chronic pain management.",

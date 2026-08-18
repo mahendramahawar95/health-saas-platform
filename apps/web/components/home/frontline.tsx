@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "@repo/ui";
+import { Badge, Section, SectionHeading } from "@repo/ui";
 import Image from "next/image";
 
 export default function Frontline() {
@@ -11,7 +11,7 @@ export default function Frontline() {
           heading="LAtest from medical frontline"
         />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
@@ -27,12 +27,12 @@ export default function Frontline() {
               {/* Badges left, Date right */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 text-xs font-medium px-2.5 py-1">
+                  <Badge className="inline-flex items-center rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 text-xs font-medium px-2.5 py-1">
                     Healthcare
-                  </span>
-                  <span className="inline-flex items-center rounded-full bg-red-500/15 text-red-600 dark:text-red-400 text-xs font-medium px-2.5 py-1">
+                  </Badge>
+                  <Badge className="inline-flex items-center rounded-full bg-red-500/15 text-red-600 dark:text-red-400 text-xs font-medium px-2.5 py-1">
                     Emergency
-                  </span>
+                  </Badge>
                 </div>
                 <span className="text-xs text-muted-foreground">
                   June 12, 2026
@@ -51,8 +51,8 @@ export default function Frontline() {
                 <Image
                   src="/avatar.avif"
                   alt="Hero"
-                  width={16}
-                  height={16}
+                  width={30}
+                  height={30}
                   className="rounded-full object-cover"
                 />
 
@@ -60,7 +60,7 @@ export default function Frontline() {
               </div>
             </div>
           </div>
-          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
@@ -100,8 +100,8 @@ export default function Frontline() {
                 <Image
                   src="/avatar.avif"
                   alt="Hero"
-                  width={16}
-                  height={16}
+                  width={30}
+                  height={30}
                   className=" rounded-full object-cover"
                 />
 
@@ -109,7 +109,7 @@ export default function Frontline() {
               </div>
             </div>
           </div>
-          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm ">
+          <div className="rounded-xl lg:mb-0 mb-8 border border-border bg-card overflow-hidden shadow-sm  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
             {/* Top Image */}
             <div className="relative w-full aspect-video">
               <Image
@@ -149,8 +149,8 @@ export default function Frontline() {
                 <Image
                   src="/avatar.avif"
                   alt="Hero"
-                  width={9}
-                  height={9}
+                  width={30}
+                  height={30}
                   className="rounded-full object-cover"
                 />
 
