@@ -282,11 +282,11 @@
   }
 }
 
-.dark {
+/* .dark {
   --color-background: oklch(18% 0 0);
   --color-foreground: oklch(98% 0 0);
   --color-card: oklch(22% 0 0);
-}
+} */
 @utility container {
   margin-inline: auto;
   padding-inline: 15px;
