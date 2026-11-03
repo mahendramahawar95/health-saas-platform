@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { DoctorDetailPage } from "@repo/ui";
+// import { DoctorDetailPage } from "@repo/ui";
 import { getDoctorBySlug } from "@/src/data/doctors-data";
 
 export default async function Page({
@@ -14,5 +14,7 @@ export default async function Page({
     notFound();
   }
 
-  return <DoctorDetailPage doctor={doctor} />;
+  // return <DoctorDetailPage doctor={doctor} />;
+  return "hii";
+
 }

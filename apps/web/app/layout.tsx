@@ -1,5 +1,5 @@
 import "@repo/ui/styles.css";
-import "../styles/globals.css";
+import "./globals.css";
 import type { Metadata } from "next";
 // import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";

@@ -32,7 +32,7 @@ export default function AppointmentForm() {
   }
 
   return (
-    <div className="rounded-xl border border-border bg-white shadow-sm p-6  w-full">
+    <div className="rounded-xl border border-border bg-white shadow-sm p-6 mb-15 w-full">
       <h2 className="text-lg font-semibold mb-1">Book an Appointment</h2>
       <p className="text-sm text-muted-foreground mb-6">
         Fill in your details and we will confirm your slot shortly.

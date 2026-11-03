@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 // import { ThemeToggle } from "@/components/providers/ThemeToggle";
 
-import CardSection from "../components/home/card-section";
+// import CardSection from "../components/home/card-section";
 import Banner from "../components/home/banner";
 import SectionAbout from "../components/home/section-about";
 import Statistics from "../components/home/statistics";
@@ -21,7 +21,7 @@ export default function Page() {
       <Header />
       {/* <ThemeToggle /> */}
       <Banner />
-      <CardSection />
+
       <SectionAbout />
       <Statistics />
       <MedicalTechnologySection />
@@ -31,12 +31,11 @@ export default function Page() {
       <Testimomials />
       <WhyChooseUsSection />
       <Frontline />
-      <div className="bg-gradient-section py-3xl w-full">
-        <AppointmentSection />
-        <div className="container">
-          <Footer />
-        </div>
-      </div>
+
+      <AppointmentSection />
+
+      <Footer />
+
       {/* <h1 className="text-display text-primary -0.5rem font-bold line-height-0 uppercase tracking-tight mt-[150px]">
         Welcome to the Home Page
       </h1> */}

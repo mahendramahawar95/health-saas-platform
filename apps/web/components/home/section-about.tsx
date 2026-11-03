@@ -19,7 +19,7 @@ const STATS = [
 
 export default function SectionAbout() {
   return (
-    <Section id="about" className="bg-section-first py-3xl pt-0">
+    <Section id="about" className="bg-section-first py-3xl ">
       <div className="container grid grid-cols-1 items-center gap-2xl lg:grid-cols-[0.9fr_1.1fr]">
         {/* Visual panel */}
         <div className="relative">
